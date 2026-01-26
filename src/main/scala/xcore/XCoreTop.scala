@@ -23,6 +23,7 @@ object XCoreSimTop extends App {
   ChiselStage.emitSystemVerilogFile(
     new XCore,
     firtoolOpts = Array(
+      "-split-verilog",
       "-disable-all-randomization",
       "-strip-debug-info",
       "-default-layer-specialization=enable"

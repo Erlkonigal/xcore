@@ -5,8 +5,14 @@ import scalafmt._
 import mill.scalalib.publish._
 import coursier.maven.MavenRepository
 
+import $file.common
+import $file.`rocket-chip`.common
+import $file.`rocket-chip`.dependencies.cde.common
+import $file.`rocket-chip`.dependencies.diplomacy.common
+import $file.`rocket-chip`.dependencies.hardfloat.common
+
 object v {
-  val scala = "2.13.12"
+  val scala = "2.13.18"
   val chiselVersion = "7.7.0"
   val chiselVersionIvy = 
       (ivy"org.chipsalliance::chisel:$chiselVersion", ivy"org.chipsalliance:::chisel-plugin:$chiselVersion")
@@ -20,15 +26,8 @@ object v {
   )
 }
 
-object deps {
-  val rc = $file.`rocket-chip`.common
-  val cde = $file.`rocket-chip`.dependencies.cde.common
-  val diplomacy = $file.`rocket-chip`.dependencies.diplomacy.common
-  val hardfloat = $file.`rocket-chip`.dependencies.hardfloat.common
-}
-
 trait Hardfloat
-  extends deps.hardfloat.HardfloatModule {
+  extends $file.`rocket-chip`.dependencies.hardfloat.common.HardfloatModule {
     def scalaVersion: T[String] = T(v.scala)
     
     def chiselModule = None
@@ -43,7 +42,7 @@ trait Hardfloat
 object hardfloat extends Hardfloat
 
 trait CDE
-  extends deps.cde.CDEModule {
+  extends $file.`rocket-chip`.dependencies.cde.common.CDEModule {
     def scalaVersion: T[String] = T(v.scala)
     override def millSourcePath: Path = super.millSourcePath / os.up / "rocket-chip" / "dependencies" / "cde" / "cde"
   }
@@ -51,7 +50,7 @@ trait CDE
 object cde extends CDE
 
 trait Diplomacy
-  extends deps.diplomacy.DiplomacyModule {
+  extends $file.`rocket-chip`.dependencies.diplomacy.common.DiplomacyModule {
     def scalaVersion: T[String] = T(v.scala)
     
     def chiselModule = None
@@ -68,7 +67,7 @@ trait Diplomacy
 
 object diplomacy extends Diplomacy
 
-trait Macros extends deps.rc.MacrosModule {
+trait Macros extends $file.`rocket-chip`.common.MacrosModule {
     def scalaVersion: T[String] = T(v.scala)
     def scalaReflectIvy: Dep = v.scalaReflect
 
@@ -77,7 +76,7 @@ trait Macros extends deps.rc.MacrosModule {
 object macros extends Macros
 
 trait RocketChip
-  extends deps.rc.RocketChipModule {
+  extends $file.`rocket-chip`.common.RocketChipModule {
     def scalaVersion: T[String] = T(v.scala)
     
     def chiselModule = None
