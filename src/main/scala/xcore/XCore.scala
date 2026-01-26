@@ -2,9 +2,8 @@ package xcore
 
 import chisel3._
 import chisel3.util._
-import sim.dpic._
+import utility.dpic._
 import xcore._
-
 class XCore(implicit p: XCoreParams) extends XCoreModule {
 
   class TestIn extends Bundle {
@@ -27,7 +26,6 @@ class XCore(implicit p: XCoreParams) extends XCoreModule {
     val reset: Option[Bool]    = None
     val in:    Option[TestIn]  = Some(Input(new TestIn))
     val out:   Option[TestOut] = None
-
     val en: Option[Bool] = Some(Input(Bool()))
   }
 

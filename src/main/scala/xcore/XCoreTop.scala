@@ -3,7 +3,7 @@ package xcore
 import _root_.circt.stage.ChiselStage
 import chisel3._
 import chisel3.util._
-import sim.utils.GenController
+import utility.dpic.GenController
 
 object XCoreSimTop extends App {
   def parseArgs(args: List[String], map: Map[String, String] = Map()): Map[String, String] = {
