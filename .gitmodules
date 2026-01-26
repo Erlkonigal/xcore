@@ -1,0 +1,7 @@
+[submodule "utility"]
+	path = utility
+	url = git@github.com:Erlkonigal/utility.git
+
+[submodule "rocket-chip"]
+	path = rocket-chip
+	url = git@github.com:Erlkonigal/rocket-chip.git

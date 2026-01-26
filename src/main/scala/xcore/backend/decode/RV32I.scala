@@ -2,11 +2,10 @@ package xcore.backend.decode
 
 import chisel3._
 import chisel3.util._
-import chisel3.util.experimental.decode._
 import xcore._
 import xcore.backend.decode._
 
-trait HasRVITable extends HasXCoreParams {
+trait HasRVI extends HasXCoreParams {
   def LUI       = "b?????????????????????????0110111"
   def AUIPC     = "b?????????????????????????0010111"
   def JAL       = "b?????????????????????????1101111"
@@ -49,15 +48,4 @@ trait HasRVITable extends HasXCoreParams {
   def PAUSE     = "b00000001000000000000000000001111"
   def ECALL     = "b00000000000000000000000001110011"
   def EBREAK    = "b00000000000100000000000001110011"
-
-  def rv32ITable =
-    List(
-      LUI -> List(
-        FUType.ALU,
-        ExecASel.ZERO,
-        ExecBSel.IMM,
-        ImmType.UType,
-        HasWriteBack.HasWB
-      )
-    )
 }

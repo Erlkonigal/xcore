@@ -1,28 +1,22 @@
 PWD:=$(shell pwd)
 MILL=$(PWD)/mill
-MILL_PROJECT=chisel
-BUILD_DIR=build
+BUILD_DIR=$(PWD)/build
 
-EMU_CPP_DIR=$(PWD)/emu
-EMU_RTL_DIR=$(BUILD_DIR)/rtl
+SIM_RTL_DIR=$(BUILD_DIR)/rtl
+GEN_SRC_DIR=$(BUILD_DIR)/generated-src
 
-EMU_CPP_SRCS=$(shell find $(EMU_CPP_DIR) -name '*.cpp')
-EMU_RTL_SRCS=$(shell find $(EMU_RTL_DIR) -name '*.sv' -or -name '*.v')
-
-emu-rtl: $(MILL)
-	@mkdir -p $(EMU_RTL_DIR)
-	$(MILL) -i $(MILL_PROJECT).runMain xcore.XCoreSimTop --target-dir $(EMU_RTL_DIR)
+sim-rtl: $(MILL)
+	@mkdir -p $(SIM_RTL_DIR)
+	$(MILL) run --target-dir $(SIM_RTL_DIR) --generated-dir $(GEN_SRC_DIR)
 
 check-format:
-	$(MILL) $(MILL_PROJECT).checkFormat
+	$(MILL) checkFormat
 
 reformat:
-	$(MILL) $(MILL_PROJECT).reformat
+	$(MILL) reformat
 
 clean:
 	rm -rf $(BUILD_DIR)
 
-test:
-	@echo $(EMU_SRCS)
 
-.PHONY: emu emu-rtl clean test
+.PHONY: sim-rtl clean
