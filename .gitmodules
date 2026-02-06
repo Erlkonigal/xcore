@@ -1,3 +1,7 @@
 [submodule "rocket-chip"]
 	path = rocket-chip
 	url = git@github.com:Erlkonigal/rocket-chip.git
+
+[submodule "emulator"]
+	path = emulator
+	url = git@github.com:Erlkonigal/emulator.git
