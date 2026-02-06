@@ -8,7 +8,7 @@ GEN_SRC_DIR=$(BUILD_DIR)/generated-src
 init:
 	git submodule update --init --recursive
 
-sim-rtl: $(MILL)
+compile: $(MILL)
 	@mkdir -p $(SIM_RTL_DIR)
 	$(MILL) xcore.run --target-dir $(SIM_RTL_DIR) --generated-dir $(GEN_SRC_DIR)
 
@@ -21,4 +21,4 @@ reformat:
 clean:
 	rm -rf $(BUILD_DIR)
 
-.PHONY: init sim-rtl check-format reformat clean
+.PHONY: init compile check-format reformat clean

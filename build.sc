@@ -73,6 +73,7 @@ trait Macros extends $file.`rocket-chip`.common.MacrosModule {
 
     override def millSourcePath: Path = super.millSourcePath / os.up / "rocket-chip" / "macros"
 }
+
 object macros extends Macros
 
 trait RocketChip
